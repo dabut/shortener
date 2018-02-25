@@ -12,4 +12,6 @@
 
 	$conn = new Connection();
 
+	$pdo = $conn->PDO();
+
 ?>

@@ -73,6 +73,8 @@
 
 					$configArray = json_decode(file_get_contents($configFile), true);
 
+					$this->loadConfigArray($configArray);
+
 				} else {
 
 					throw new Exception('Unsupported config filetype');
