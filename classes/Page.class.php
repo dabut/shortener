@@ -4,10 +4,6 @@
 
 		private $pagename;
 		private $title;
-		private $body = Array();
-		private $css = Array();
-		private $js = Array();
-		private $images = Array();
 
 		public function __construct($pagename = 'Home') {
 
@@ -23,78 +19,35 @@
 
 				throw new Exception("Page could not be found");
 			}
-
 		}
 
-		public function getTitle() {
-			return $this->title;
+		public function getPagename() {
+			return $this->pagename;
 		}
 
-		public function loadBody() {
+		public function loadCSS($cssFile) {
 
-			foreach ($this->body as $file) {
-				include $file;
-			}
-		}
-
-		public function loadCSS() {
-
-			$style = '';
-
-			foreach ($this->css as $file) {
-				$style .= '<style>' . file_get_contents($file) . '</style>';
-			}
-
-			return $style;
-		}
-
-		public function loadJS() {
-
-			$script = '';
-
-			foreach($this->js as $file) {
-				$script .= '<script>' . file_get_contents($file) . '</script>';
-			}
-
-			return $script;
-		}
-
-		private function addBody($body) {
-
-			$filename = ROOT_DIR . '/content/' . $body;
-
-			if (!in_array(strtolower(pathinfo($filename, PATHINFO_EXTENSION)), Array('html', 'php'))) {
-				$filename .= '.html';
-			}
-
-			if (file_exists($filename)) {
-				array_push($this->body, $filename);
-			}
-		}
-
-		private function addCSS($css) {
-
-			$filename = ROOT_DIR . '/assets/css/' . $css;
+			$filename = ROOT_DIR . '/assets/css/' . $cssFile;
 
 			if (strtolower(pathinfo($filename, PATHINFO_EXTENSION)) != 'css') {
 				$filename .= '.css';
 			}
 
 			if (file_exists($filename)) {
-				array_push($this->css, $filename);
+				return '<style>' . file_get_contents($file) . '</style>';
 			}
 		}
 
-		private function addJS($js) {
+		public function loadJS($jsFile) {
 
-			$filename = ROOT_DIR . '/assets/js/' . $js;
+			$filename = ROOT_DIR . '/assets/js/' . $jsFile;
 
 			if (strtolower(pathinfo($filename, PATHINFO_EXTENSION)) != 'js') {
 				$filename .= '.js';
 			}
 
 			if (file_exists($filename)) {
-				array_push($this->css, $filename);
+				return '<script>' . file_get_contents($file) . '</script>';
 			}
 		}
 	}

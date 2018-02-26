@@ -20,13 +20,14 @@
 
 	$pdo = $conn->PDO();
 
-	// if (isset($_SESSION['user_id'])) {
-	// 	$user = new User();
-	// } else {
-	// 	//LOGIN
-	// }
-
-	$user = new User(1);
+	if (isset($_SESSION['userId'])) {
+		$user = new User($_SESSION['userId']);
+	} else {
+		if (!isset($_GET['request']) || ($_GET['request'] != 'login' && $_GET['request'] != 'login_action')) {
+			header('Location: login');
+			exit();
+		}
+	}
 
 	if (file_exists(ROOT_DIR . '/actions.php')) {
 		include ROOT_DIR . '/actions.php';

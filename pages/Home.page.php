@@ -1,7 +1,7 @@
 <?php
 
-	$title = 'Home';
-
-	$this->addCSS('style');
+	$this->loadCSS('style');
 
 ?>
+
+<a href="add_route">Add route</a>

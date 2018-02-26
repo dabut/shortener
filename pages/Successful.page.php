@@ -1,7 +1,11 @@
 <?php
 
-	$title = 'Successful';
+	if (isset($_GET['action'])) {
+		echo 'Successfully did a ' . $_GET['action'];
+	}
 
-	$this->addBody('successful.php');
+	if (isset($_GET['id'])) {
+		echo ' with id: ' . $_GET['id'];
+	}
 
 ?>

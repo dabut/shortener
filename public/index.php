@@ -17,11 +17,6 @@
 			exit();
 			break;
 
-		case 'action';
-			$action = new Action($router->getData());
-			$action->do();
-			break;
-
 		default:
 			$page = new Page('404');
 			break;
@@ -30,16 +25,24 @@
 	if (!isset($page)) {
 		$page = new Page('blank');
 	}
+
+	echo '<!--';
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><?=$page->getTitle()?></title>
-		<?=$page->loadCSS()?>
-		<?=$page->loadJS()?>
+		<title>Error</title>
 	</head>
 	<body>
-		<?=$page->loadBody()?>
+		<h1>Error</h1>
+		<p>
+			If you are seeing this there has been an error with the webservice. Please contact the site admin.
+		</p>
 	</body>
 </html>
+
+<?php
+
+	echo '-->';
+?>
