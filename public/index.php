@@ -9,7 +9,7 @@
 	switch($router->getAction()) {
 
 		case 'page':
-			$page = new Page($router->getData());
+			$page = new Page($router->getRequest(), $router->getData());
 			break;
 
 		case 'redirect':

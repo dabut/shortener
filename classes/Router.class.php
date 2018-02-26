@@ -9,6 +9,10 @@
 		private $data;
 		private $timestamp;
 
+		public function getRequest() {
+			return $this->request;
+		}
+
 		public function getId() {
 			return $this->id;
 		}

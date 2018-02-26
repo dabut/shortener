@@ -23,7 +23,7 @@
 	if (isset($_SESSION['userId'])) {
 		$user = new User($_SESSION['userId']);
 	} else {
-		if (!isset($_GET['request']) || ($_GET['request'] != 'login' && $_GET['request'] != 'login_action')) {
+		if (!isset($_GET['request']) || $_GET['request'] != 'login') {
 			header('Location: login');
 			exit();
 		}

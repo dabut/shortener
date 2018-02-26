@@ -3,17 +3,18 @@
 	class Page {
 
 		private $pagename;
-		private $title;
 
-		public function __construct($pagename = 'Home') {
+		public function __construct($filename = 'home', $pagename = 'Home') {
 
-			if (file_exists(ROOT_DIR . '/pages/' . $pagename . '.page.php')) {
+			global $pdo;
+			global $user;
 
-				require(ROOT_DIR . '/pages/' . $pagename . '.page.php');
+			$this->pagename = $pagename;
+			$page =& $this;
 
-				if (isset($title)) {
-					$this->title = $title;
-				}
+			if (file_exists(ROOT_DIR . '/pages/' . $filename . '.page.php')) {
+
+				require(ROOT_DIR . '/pages/' . $filename . '.page.php');
 
 			} else {
 
@@ -34,7 +35,7 @@
 			}
 
 			if (file_exists($filename)) {
-				return '<style>' . file_get_contents($file) . '</style>';
+				return '<style>' . file_get_contents($filename) . '</style>';
 			}
 		}
 
