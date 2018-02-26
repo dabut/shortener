@@ -1,5 +1,10 @@
 <?php
 
+	if (isset($user)) {
+		header('Location: home');
+		exit();
+	}
+
 	$required = Array('username', 'password');
 
 	if (count(array_intersect_key(array_flip($required), $_POST)) == count($required)) {
@@ -18,6 +23,9 @@
 			$result = $query->fetch();
 
 			$_SESSION['userId'] = $result['id'];
+
+			header('Location: home');
+			exit();
 
 		} else {
 
