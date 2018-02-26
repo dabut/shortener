@@ -1,5 +1,7 @@
 <?php
 
+	session_start();
+
 	include __DIR__ . '/constants.php';
 
 	spl_autoload_register(function($class_name) {
@@ -17,6 +19,14 @@
 	$conn = new Connection();
 
 	$pdo = $conn->PDO();
+
+	// if (isset($_SESSION['user_id'])) {
+	// 	$user = new User();
+	// } else {
+	// 	//LOGIN
+	// }
+
+	$user = new User(1);
 
 	if (file_exists(ROOT_DIR . '/actions.php')) {
 		include ROOT_DIR . '/actions.php';
