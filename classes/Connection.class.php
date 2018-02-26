@@ -35,9 +35,9 @@
 
 			if ($configArray != Array() && array_keys($configArray) != range(0, count($configArray) - 1)) {
 
-				$configKeys = Array('host', 'user', 'dbname');
+				$required = Array('host', 'user', 'dbname');
 
-				if (count(array_intersect_key(array_flip($configKeys), $configArray)) == count($configKeys)) {
+				if (count(array_intersect_key(array_flip($required), $configArray)) == count($required)) {
 
 					$this->host = $configArray['host'];
 					$this->dbname = $configArray['dbname'];
