@@ -68,9 +68,29 @@
 				$this->data = $route['data'];
 				$this->timestamp = $route['timestamp'];
 
+				$this->click();
+
 			} else {
 
 				throw new Exception("Error parsing request");
+			}
+		}
+
+		private function click() {
+
+			global $pdo;
+
+			if (isset($pdo)) {
+
+				$query = $pdo->prepare("INSERT INTO clicks (route_id, ip) VALUES (:route_id, :ip)");
+
+				$query->bindParam(':route_id', $this->id);
+				$query->bindParam(':ip', $_SERVER['REMOTE_ADDR']);
+				$query->execute();
+
+			} else {
+
+				throw new Exception("PDO not created");
 			}
 		}
 
@@ -94,7 +114,7 @@
 				} else {
 
 					$this->request = '404';
-					
+
 					return $this->getRoute();
 				}
 
