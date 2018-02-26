@@ -17,9 +17,17 @@
 			exit();
 			break;
 
+		case 'action';
+			$action = new Action($router->getData());
+			break;
+
 		default:
 			$page = new Page('404');
 			break;
+	}
+
+	if (!isset($page)) {
+		$page = new Page('blank');
 	}
 ?>
 
