@@ -6,10 +6,20 @@
 
 	$router->parseGet($_GET);
 
-	if ($router->getAction() == 'page') {
-		$page = new Page($router->getData());
-	} else {
-		$page = new Page('blank');
+	switch($router->getAction()) {
+
+		case 'page':
+			$page = new Page($router->getData());
+			break;
+
+		case 'redirect':
+			header('Location: ' . $router->getData());
+			exit();
+			break;
+
+		default:
+			$page = new Page('404');
+			break;
 	}
 ?>
 
