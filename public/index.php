@@ -19,6 +19,7 @@
 
 		case 'action';
 			$action = new Action($router->getData());
+			$action->do();
 			break;
 
 		default:
@@ -39,5 +40,6 @@
 		<?=$page->loadJS()?>
 	</head>
 	<body>
+		<?=$page->loadBody()?>
 	</body>
 </html>

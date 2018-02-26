@@ -18,4 +18,8 @@
 
 	$pdo = $conn->PDO();
 
+	if (file_exists(ROOT_DIR . '/actions.php')) {
+		include ROOT_DIR . '/actions.php';
+	}
+
 ?>

@@ -4,6 +4,7 @@
 
 		private $pagename;
 		private $title;
+		private $body = Array();
 		private $css = Array();
 		private $js = Array();
 		private $images = Array();
@@ -29,6 +30,18 @@
 			return $this->title;
 		}
 
+		public function loadBody() {
+
+			$body = '';
+
+			foreach ($this->body as $file) {
+				$body .= file_get_contents($file);
+			}
+
+			return $body;
+
+		}
+
 		public function loadCSS() {
 
 			$style = '';
@@ -49,7 +62,19 @@
 			}
 
 			return $script;
+		}
 
+		private function addBody($body) {
+
+			$filename = ROOT_DIR . '/content/' . $body;
+
+			if (strtolower(pathinfo($filename, PATHINFO_EXTENSION)) != 'html') {
+				$filename .= '.html';
+			}
+
+			if (file_exists($filename)) {
+				array_push($this->body, $filename);
+			}
 		}
 
 		private function addCSS($css) {
