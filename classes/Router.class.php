@@ -94,7 +94,8 @@
 				} else {
 
 					$this->request = '404';
-					$this->getRoute();
+					
+					return $this->getRoute();
 				}
 
 			} else {

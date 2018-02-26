@@ -16,9 +16,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
+		<title><?=$page->getTitle()?></title>
+		<?=$page->loadCSS()?>
+		<?=$page->loadJS()?>
 	</head>
 	<body>
-
 	</body>
 </html>
