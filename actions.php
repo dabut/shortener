@@ -2,11 +2,11 @@
 
 	$actions = Array(
 
-		'add_route' => function() {
+		'add_route' => function($param) {
 
-			$postKeys = Array('request', 'action', 'data');
+			$required = Array('request', 'action', 'data');
 
-			if (count(array_intersect_key(array_flip($postKeys), $_POST)) == count($postKeys)) {
+			if (count(array_intersect_key(array_flip($required), $param)) == count($required)) {
 
 				global $pdo;
 				global $user;
@@ -16,10 +16,15 @@
 				$query = $pdo->prepare("INSERT INTO routes (user_id, request, action, data) VALUES (:user_id, :request, :action, :data)");
 
 				$query->bindParam(':user_id', $userId);
-				$query->bindParam(':request', $_POST['request']);
-				$query->bindParam(':action', $_POST['action']);
-				$query->bindParam(':data', $_POST['data']);
+				$query->bindParam(':request', $param['request']);
+				$query->bindParam(':action', $param['action']);
+				$query->bindParam(':data', $param['data']);
 				$query->execute();
+
+				$routeId = $pdo->lastInsertId();
+
+				header('Location: successful?action=add_route&id=' . $routeId);
+				exit();
 
 			} else {
 

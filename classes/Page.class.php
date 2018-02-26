@@ -32,14 +32,9 @@
 
 		public function loadBody() {
 
-			$body = '';
-
 			foreach ($this->body as $file) {
-				$body .= file_get_contents($file);
+				include $file;
 			}
-
-			return $body;
-
 		}
 
 		public function loadCSS() {
@@ -68,7 +63,7 @@
 
 			$filename = ROOT_DIR . '/content/' . $body;
 
-			if (strtolower(pathinfo($filename, PATHINFO_EXTENSION)) != 'html') {
+			if (!in_array(strtolower(pathinfo($filename, PATHINFO_EXTENSION)), Array('html', 'php'))) {
 				$filename .= '.html';
 			}
 

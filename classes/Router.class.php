@@ -33,10 +33,10 @@
 
 			if (isset($get['request'])) {
 
-				$this->request = $this->parseRequest($get['request']);
+				$this->parseRequest($get['request']);
 			} else {
 
-				$this->request = 'home';
+				$this->parseRequest('home');
 			}
 		}
 
@@ -54,6 +54,10 @@
 				if ($requestParts[count($requestParts) - 1] == '') {
 
 					unset($requestParts[count($requestParts) - 1]);
+				}
+
+				if (count($requestParts) == 0) {
+					$requestParts = Array('home');
 				}
 
 				$requet = implode('/', $requestParts);
