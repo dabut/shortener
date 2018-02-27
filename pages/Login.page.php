@@ -22,7 +22,7 @@
 
 			$result = $query->fetch();
 
-			$_SESSION['userId'] = $result['id'];
+			$_SESSION['user_id'] = $result['id'];
 
 			header('Location: home');
 			exit();
@@ -46,5 +46,6 @@
 			<input type="password" name="password" placeholder="Password" />
 			<input type="submit" value="Login" />
 		</form>
+		<a href="register">Register</a>
 	</body>
 </html>

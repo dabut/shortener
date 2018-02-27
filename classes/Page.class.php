@@ -19,9 +19,9 @@
 			}
 		}
 
-		public function loadCSS($cssFile) {
+		public function loadCSS($css_file) {
 
-			$filename = ROOT_DIR . '/assets/css/' . $cssFile;
+			$filename = ROOT_DIR . '/assets/css/' . $css_file;
 
 			if (strtolower(pathinfo($filename, PATHINFO_EXTENSION)) != 'css') {
 				$filename .= '.css';
@@ -32,9 +32,9 @@
 			}
 		}
 
-		public function loadJS($jsFile) {
+		public function loadJS($js_file) {
 
-			$filename = ROOT_DIR . '/assets/js/' . $jsFile;
+			$filename = ROOT_DIR . '/assets/js/' . $js_file;
 
 			if (strtolower(pathinfo($filename, PATHINFO_EXTENSION)) != 'js') {
 				$filename .= '.js';

@@ -22,25 +22,25 @@
 
 		public function parseRequest($request) {
 
-			$requestParts = explode('/', $request);
+			$request_parts = explode('/', $request);
 
-			if (count($requestParts) > 0) {
+			if (count($request_parts) > 0) {
 				
-				if ($requestParts[0] == '') {
+				if ($request_parts[0] == '') {
 
-					unset($requestParts[0]);
+					unset($request_parts[0]);
 				}
 
-				if ($requestParts[count($requestParts) - 1] == '') {
+				if ($request_parts[count($request_parts) - 1] == '') {
 
-					unset($requestParts[count($requestParts) - 1]);
+					unset($request_parts[count($request_parts) - 1]);
 				}
 
-				if (count($requestParts) == 0) {
-					$requestParts = Array('home');
+				if (count($request_parts) == 0) {
+					$request_parts = Array('home');
 				}
 
-				$request = implode('/', $requestParts);
+				$request = implode('/', $request_parts);
 
 				$this->request = $request;
 

@@ -31,18 +31,18 @@
 			return $pdo;
 		}
 
-		private function loadConfigArray($configArray) {
+		private function loadConfigArray($config_array) {
 
-			if ($configArray != Array() && array_keys($configArray) != range(0, count($configArray) - 1)) {
+			if ($config_array != Array() && array_keys($config_array) != range(0, count($config_array) - 1)) {
 
 				$required = Array('host', 'user', 'dbname');
 
-				if (count(array_intersect_key(array_flip($required), $configArray)) == count($required)) {
+				if (count(array_intersect_key(array_flip($required), $config_array)) == count($required)) {
 
-					$this->host = $configArray['host'];
-					$this->dbname = $configArray['dbname'];
-					$this->user = $configArray['user'];
-					$this->pass = isset($configArray['pass']) ? $configArray['pass'] : '';
+					$this->host = $config_array['host'];
+					$this->dbname = $config_array['dbname'];
+					$this->user = $config_array['user'];
+					$this->pass = isset($config_array['pass']) ? $config_array['pass'] : '';
 
 				} else {
 
@@ -53,10 +53,10 @@
 
 				if (count($configArray) >= 3) {
 
-					$this->host = $configArray[0];
-					$this->dbname = $configArray[1];
-					$this->user = $configArray[2];
-					$this->pass = isset($configArray[3]) ? $configArray[3] : '';
+					$this->host = $config_array[0];
+					$this->dbname = $config_array[1];
+					$this->user = $config_array[2];
+					$this->pass = isset($config_array[3]) ? $config_array[3] : '';
 
 				} else {
 
@@ -65,15 +65,15 @@
 			}
 		}
 
-		private function loadConfigFile($configFile) {
+		private function loadConfigFile($config_file) {
 
-			if (file_exists($configFile)) {
+			if (file_exists($config_file)) {
 
-				if (strtolower(pathinfo($configFile, PATHINFO_EXTENSION)) == 'json') {
+				if (strtolower(pathinfo($config_file, PATHINFO_EXTENSION)) == 'json') {
 
-					$configArray = json_decode(file_get_contents($configFile), true);
+					$config_array = json_decode(file_get_contents($config_file), true);
 
-					$this->loadConfigArray($configArray);
+					$this->loadConfigArray($config_array);
 
 				} else {
 
