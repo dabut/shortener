@@ -38,14 +38,20 @@
 <html>
 	<head>
 		<title>Login</title>
-		<?=$page->loadCSS('script.css')?>
+		<?=$page->loadCSS('style.css')?>
 	</head>
 	<body>
-		<form action="login" method="POST">
-			<input type="text" name="username" placeholder="Username" />
-			<input type="password" name="password" placeholder="Password" />
-			<input type="submit" value="Login" />
-		</form>
-		<a href="register">Register</a>
+		<?=$page->loadElement('header')?>
+		<section>
+			<h2>Login</h2>
+
+			<form action="login" method="POST">
+				<input type="text" name="username" placeholder="Username" />
+				<input type="password" name="password" placeholder="Password" />
+				<input type="submit" value="Login" />
+			</form>
+			<a href="register">Register</a>
+		</section>
+		<?=$page->loadElement('footer')?>
 	</body>
 </html>

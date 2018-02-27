@@ -1,0 +1,113 @@
+@media only screen and (max-width: 950px) {
+
+	body {
+		width: 600px !important;
+	}
+
+}
+
+@media only screen and (max-width: 750px) {
+
+	body {
+		padding: 0px 10px !important;
+		width: 300px !important;
+	}
+
+	form, input, textarea {
+		width: 100% !important;
+	}
+
+	nav a {
+		display: inline-block;
+		width: 100%;
+	}
+
+	.divider {
+		display: none !important;
+	}
+	
+}
+
+html {
+	background-color: rgb(195, 195, 195);
+	padding-top: 50px;
+}
+
+body {
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(0, 0, 0);
+	font-family: Arial;
+	padding: 0 60px;
+	margin: 0 auto;
+	width: 800px;
+}
+
+form {
+	margin: 0 auto;
+	width: 250px;
+}
+
+form table {
+	width: 100%;
+}
+
+form table, form tr, form th, form td {
+	border: 0 !important;
+}
+
+form th:nth-child(2), form td:nth-child(2) {
+	width: 25px;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+hr {
+	background-color: rgb(0, 0, 0);
+	border: 0;
+	height: 1px;
+}
+
+img {
+	border: 1px solid rgb(0, 0, 0);
+	width: 100%;
+}
+
+input:not([type='radio']), textarea, button {
+	border: 1px solid rgb(0, 0, 0);
+	box-sizing: border-box;
+	display: block;
+	padding: 5px;
+	min-width: 100%;
+}
+
+input[type='radio'] {
+	box-sizing: border-box;
+}
+
+nav a {
+	color: rgb(0, 0, 0);
+	font-weight: bold;
+	text-decoration: none;
+}
+
+nav a:hover {
+	color: rgb(60, 60, 60);
+	text-decoration: underline;
+}
+
+table, tr, th, td {
+	border: 1px solid rgb(0, 0, 0);
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+textarea {
+	height: 72px;
+	resize: none;
+}
+
+.divider {
+	display: inline;
+}

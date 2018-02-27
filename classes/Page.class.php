@@ -29,6 +29,7 @@
 
 			if (file_exists($filename)) {
 				return '<style>' . file_get_contents($filename) . '</style>';
+				print_r('yeah');
 			}
 		}
 
@@ -43,6 +44,20 @@
 			if (file_exists($filename)) {
 				return '<script>' . file_get_contents($file) . '</script>';
 			}
+		}
+
+		public function loadElement($element_file) {
+
+			$filename = ROOT_DIR . '/assets/elements/' . $element_file;
+
+			if (strtolower(pathinfo($filename, PATHINFO_EXTENSION)) != 'html') {
+				$filename .= '.html';
+			}
+
+			if (file_exists($filename)) {
+				return file_get_contents($filename);
+			}
+
 		}
 	}
 
