@@ -5,6 +5,10 @@
 		exit();
 	}
 
+	$defaults = Array();
+
+	$defaults['username'] = isset($_GET['username']) ? $_GET['username'] : '';
+
 	$required = Array('username', 'email', 'password', 'password_check');
 
 	if (count(array_intersect_key(array_flip($required), $_POST)) == count($required)) {
@@ -51,14 +55,21 @@
 <html>
 	<head>
 		<title>Register</title>
+		<?=$page->loadCSS('style.css')?>
 	</head>
 	<body>
-		<form action="register" method="POST">
-			<input type="text" name="username" placeholder="Username" />
-			<input type="email" name="email" placeholder="Email" />
-			<input type="password" name="password" placeholder="Password" />
-			<input type="password" name="password_check" placeholder="Password Again" />
-			<input type="submit" value="Register" />
-		</form>
+		<?=$page->loadElement('header.html')?>
+		<section>
+			<h2>Register</h2>
+
+			<form action="register" method="POST">
+				<input type="text" name="username" placeholder="Username" value="<?=$defaults['username']?>" />
+				<input type="email" name="email" placeholder="Email" />
+				<input type="password" name="password" placeholder="Password" />
+				<input type="password" name="password_check" placeholder="Password Again" />
+				<input type="submit" value="Register" />
+			</form>
+		</section>
+		<?=$page->loadElement('footer.html')?>
 	</body>
 </html>

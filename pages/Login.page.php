@@ -5,6 +5,16 @@
 		exit();
 	}
 
+	if (isset($_POST['action']) && $_POST['action'] == 'Register') {
+		if (isset($_POST['username']) && $_POST['username'] != '') {
+			header('Location: register?username=' . $_POST['username']);
+			exit();
+		} else {
+			header('Location: register');
+			exit();
+		}
+	}
+
 	$required = Array('username', 'password');
 
 	if (count(array_intersect_key(array_flip($required), $_POST)) == count($required)) {
@@ -41,17 +51,17 @@
 		<?=$page->loadCSS('style.css')?>
 	</head>
 	<body>
-		<?=$page->loadElement('header')?>
+		<?=$page->loadElement('header.html')?>
 		<section>
 			<h2>Login</h2>
 
 			<form action="login" method="POST">
 				<input type="text" name="username" placeholder="Username" />
 				<input type="password" name="password" placeholder="Password" />
-				<input type="submit" value="Login" />
+				<input type="submit" name="action" value="Login" />
+				<input type="submit" name="action" value="Register" />
 			</form>
-			<a href="register">Register</a>
 		</section>
-		<?=$page->loadElement('footer')?>
+		<?=$page->loadElement('footer.html')?>
 	</body>
 </html>
