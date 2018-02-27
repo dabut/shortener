@@ -6,23 +6,9 @@
 
 	$router->parseGet($_GET);
 
-	switch($router->getAction()) {
-
-		case 'page':
-			$page = new Page($router->getRequest(), $router->getData());
-			break;
-
-		case 'redirect':
-			header('Location: ' . $router->getData());
-			exit();
-			break;
-
-		default:
-			$page = new Page('404');
-			break;
-	}
-
-	if (!isset($page)) {
+	if (file_exists(ROOT_DIR . '/pages/' . $router->getRequest() . '.page.php')) {
+		$page = new Page($router->getRequest());
+	} else {
 		$page = new Page('blank');
 	}
 

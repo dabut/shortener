@@ -5,7 +5,6 @@
 		private $request = 'home';
 		private $id;
 		private $userId;
-		private $action;
 		private $data;
 		private $timestamp;
 
@@ -72,7 +71,6 @@
 
 				$this->id = $route['id'];
 				$this->userId = $route['user_id'];
-				$this->action = $route['action'];
 				$this->data = $route['data'];
 				$this->timestamp = $route['timestamp'];
 
@@ -80,7 +78,7 @@
 
 			} else {
 
-				throw new Exception("Error parsing request");
+				$this->parseRequest('home');
 			}
 		}
 
@@ -108,7 +106,7 @@
 
 			if (isset($pdo)) {
 
-				$query = $pdo->prepare("SELECT id, user_id, request, action, data, timestamp FROM routes WHERE request = :request");
+				$query = $pdo->prepare("SELECT id, user_id, request, data, timestamp FROM routes WHERE request = :request");
 
 				$query->bindParam(':request', $this->request);
 				$query->execute();
