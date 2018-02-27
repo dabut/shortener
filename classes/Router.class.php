@@ -44,8 +44,6 @@
 
 				$this->request = $request;
 
-				$this->click();
-
 				return $this->getRoute();
 
 			} else {
@@ -54,7 +52,7 @@
 			}
 		}
 
-		private function click() {
+		private function click($route_id) {
 
 			global $pdo;
 
@@ -62,7 +60,7 @@
 
 				$query = $pdo->prepare("INSERT INTO clicks (route_id, ip) VALUES (:route_id, :ip)");
 
-				$query->bindParam(':route_id', $this->id);
+				$query->bindParam(':route_id', $route_id);
 				$query->bindParam(':ip', $_SERVER['REMOTE_ADDR']);
 				$query->execute();
 
@@ -78,7 +76,7 @@
 
 			if (isset($pdo)) {
 
-				$query = $pdo->prepare("SELECT route FROM routes WHERE request = :request");
+				$query = $pdo->prepare("SELECT id, route FROM routes WHERE request = :request");
 
 				$query->bindParam(':request', $this->request);
 				$query->execute();
@@ -89,6 +87,8 @@
 
 					$type = 'redirect';
 					$route = $result['route'];
+
+					$this->click($result['id']);
 
 					return Array('type' => $type, 'route' => $route);
 

@@ -1,6 +1,6 @@
 <?php
 
-	unset($_SESSION['userId']);
+	unset($_SESSION['user_id']);
 	session_destroy();
 	header('Location: login');
 	exit();

@@ -4,11 +4,11 @@
 
 	if (count(array_intersect_key(array_flip($required), $_POST)) == count($required)) {
 
-		$userId = $user->getId();
+		$user_id = $user->getId();
 
-		$query = $pdo->prepare("INSERT INTO requests (user_id, request, route) VALUES (:user_id, :request, :route)");
+		$query = $pdo->prepare("INSERT INTO routes (user_id, request, route) VALUES (:user_id, :request, :route)");
 
-		$query->bindParam(':user_id', $userId);
+		$query->bindParam(':user_id', $user_id);
 		$query->bindParam(':request', $_POST['request']);
 		$query->bindParam(':route', $_POST['route']);
 		$query->execute();
