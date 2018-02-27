@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><?=$page->getPagename()?></title>
+		<title>Register</title>
 	</head>
 	<body>
 	</body>

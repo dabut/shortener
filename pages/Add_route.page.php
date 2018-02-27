@@ -1,17 +1,16 @@
 <?php
 
-	$required = Array('request', 'action', 'data');
+	$required = Array('request', 'route');
 
 	if (count(array_intersect_key(array_flip($required), $_POST)) == count($required)) {
 
 		$userId = $user->getId();
 
-		$query = $pdo->prepare("INSERT INTO routes (user_id, request, action, data) VALUES (:user_id, :request, :action, :data)");
+		$query = $pdo->prepare("INSERT INTO requests (user_id, request, route) VALUES (:user_id, :request, :route)");
 
 		$query->bindParam(':user_id', $userId);
 		$query->bindParam(':request', $_POST['request']);
-		$query->bindParam(':action', $_POST['action']);
-		$query->bindParam(':data', $_POST['data']);
+		$query->bindParam(':route', $_POST['route']);
 		$query->execute();
 
 	}
@@ -21,13 +20,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><?=$page->getPagename()?></title>
+		<title>Add Route</title>
 	</head>
 	<body>
 		<form action="add_route" method="POST">
 			<input type="text" name="request" placeholder="Request" />
-			<input type="text" name="action" placeholder="Action" />
-			<input type="text" name="data" placeholder="Data" />
+			<input type="text" name="route" placeholder="Route" />
 			<input type="submit" value="Add" />
 		</form>
 	</body>

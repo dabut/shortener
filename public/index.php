@@ -2,14 +2,17 @@
 
 	include '../global.php';
 
+	$page = new Page('blank');
+
 	$router = new Router();
 
-	$router->parseGet($_GET);
+	$route = $router->parseGet($_GET);
 
-	if (file_exists(ROOT_DIR . '/pages/' . $router->getRequest() . '.page.php')) {
-		$page = new Page($router->getRequest());
+	if ($route['type'] == 'redirect') {
+		header('Location: ' . $route['route']);
+		exit();
 	} else {
-		$page = new Page('blank');
+		$page = new Page($route['route']);
 	}
 
 	echo '<!--';

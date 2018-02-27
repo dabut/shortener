@@ -29,9 +29,7 @@
 
 		} else {
 
-			throw new Exception("User not found");
 		}
-
 	}
 
 ?>
@@ -39,7 +37,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><?=$page->getPagename()?></title>
+		<title>Login</title>
 		<?=$page->loadCSS('script.css')?>
 	</head>
 	<body>

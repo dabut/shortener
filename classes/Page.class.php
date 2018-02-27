@@ -2,14 +2,11 @@
 
 	class Page {
 
-		private $pagename;
-
-		public function __construct($filename = 'home', $pagename = 'Home') {
+		public function __construct($filename = 'home') {
 
 			global $pdo;
 			global $user;
 
-			$this->pagename = $pagename;
 			$page =& $this;
 
 			if (file_exists(ROOT_DIR . '/pages/' . $filename . '.page.php')) {
@@ -18,12 +15,8 @@
 
 			} else {
 
-				throw new Exception("Page could not be found");
+				return new Page('404');
 			}
-		}
-
-		public function getPagename() {
-			return $this->pagename;
 		}
 
 		public function loadCSS($cssFile) {

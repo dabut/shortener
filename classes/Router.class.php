@@ -3,43 +3,20 @@
 	class Router {
 
 		private $request = 'home';
-		private $id;
-		private $userId;
-		private $data;
-		private $timestamp;
 
 		public function getRequest() {
 			return $this->request;
-		}
-
-		public function getId() {
-			return $this->id;
-		}
-
-		public function getUserId() {
-			return $this->userId;
-		}
-
-		public function getAction() {
-			return $this->action;
-		}
-
-		public function getData() {
-			return $this->data;
-		}
-
-		public function getTimestamp() {
-			return $this->timestamp;
 		}
 
 		public function parseGet($get) {
 
 			if (isset($get['request'])) {
 
-				$this->parseRequest($get['request']);
+				return $this->parseRequest($get['request']);
+
 			} else {
 
-				$this->parseRequest('home');
+				return $this->parseRequest('home');
 			}
 		}
 
@@ -63,22 +40,17 @@
 					$requestParts = Array('home');
 				}
 
-				$requet = implode('/', $requestParts);
+				$request = implode('/', $requestParts);
 
 				$this->request = $request;
 
-				$route = $this->getRoute();
-
-				$this->id = $route['id'];
-				$this->userId = $route['user_id'];
-				$this->data = $route['data'];
-				$this->timestamp = $route['timestamp'];
-
 				$this->click();
+
+				return $this->getRoute();
 
 			} else {
 
-				$this->parseRequest('home');
+				return $this->parseRequest('home');
 			}
 		}
 
@@ -106,7 +78,7 @@
 
 			if (isset($pdo)) {
 
-				$query = $pdo->prepare("SELECT id, user_id, request, data, timestamp FROM routes WHERE request = :request");
+				$query = $pdo->prepare("SELECT route FROM routes WHERE request = :request");
 
 				$query->bindParam(':request', $this->request);
 				$query->execute();
@@ -115,13 +87,22 @@
 
 				if (!empty($result)) {
 
-					return $result;
+					$type = 'redirect';
+					$route = $result['route'];
+
+					return Array('type' => $type, 'route' => $route);
 
 				} else {
 
-					$this->request = '404';
+					$type = 'page';
 
-					return $this->getRoute();
+					if (file_exists(ROOT_DIR . '/pages/' . $this->getRequest() . '.page.php')) {
+						$route = $this->getRequest();
+					} else {
+						$route = '404';
+					}
+
+					return Array('type' => $type, 'route' => $route);
 				}
 
 			} else {

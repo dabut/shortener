@@ -1,6 +1,6 @@
 <html>
 <head>
-<title><?=$page->getPagename()?></title>
+<title>Home</title>
 <?=$page->loadCSS('style.css')?>
 </head>
 <body>

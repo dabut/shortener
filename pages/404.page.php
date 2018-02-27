@@ -1,5 +1,9 @@
-<?php
-
-	$title = '404';
-
-?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>404</title>
+	</head>
+	<body>
+		<p>404 Page not found.</p>
+	</body>
+</html>
