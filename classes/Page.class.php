@@ -2,6 +2,8 @@
 
 	class Page {
 
+		private $errors;
+
 		public function __construct($filename = 'home') {
 
 			global $pdo;
@@ -17,6 +19,12 @@
 
 				return new Page('404');
 			}
+		}
+
+		public function error($message) {
+
+			array_push($this->errors, $message);
+
 		}
 
 		public function loadCSS($css_file) {

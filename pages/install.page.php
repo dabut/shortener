@@ -19,51 +19,39 @@
 
 				$config = json_encode($conn->getConfig());
 
-				try {
+				$sql = file_get_contents(ROOT_DIR . '/database.sql');
 
-					file_put_contents(ROOT_DIR . '/config/config.json', $config);
+				$query = $pdo->exec($sql);
 
-					$sql = file_get_contents(ROOT_DIR . '/database.sql');
+				$query = $pdo->prepare("SELECT id FROM users WHERE id = 1");
 
-					$query = $pdo->exec($sql);
+				$query->execute();
 
-					$query = $pdo->prepare("SELECT id FROM users WHERE id = 1");
+				if ($query->rowCount() == 0) {
 
+					$password = md5($_POST['password']);
+
+					$query = $pdo->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :email)");
+
+					$query->bindParam(':username', $_POST['username']);
+					$query->bindParam(':password', $password);
+					$query->bindParam(':email', $_POST['email']);
 					$query->execute();
 
-					if ($query->rowCount() == 0) {
+				} else {
 
-						$password = md5($_POST['password']);
+					$password = md5($_POST['password']);
 
-						$query = $pdo->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :email)");
+					$query = $pdo->prepare("UPDATE users SET username = :username, password = :password, email = :email WHERE id = 1");
 
-						$query->bindParam(':username', $_POST['username']);
-						$query->bindParam(':password', $password);
-						$query->bindParam(':email', $_POST['email']);
-						$query->execute();
+					$query->bindParam(':username', $_POST['username']);
+					$query->bindParam(':password', $password);
+					$query->bindParam(':email', $_POST['email']);
+					$query->execute();
 
-					} else {
-
-						$password = md5($_POST['password']);
-
-						$query = $pdo->prepare("UPDATE users SET username = :username, password = :password, email = :email WHERE id = 1");
-
-						$query->bindParam(':username', $_POST['username']);
-						$query->bindParam(':password', $password);
-						$query->bindParam(':email', $_POST['email']);
-						$query->execute();
-
-					}
-
-					$_SESSION['user_id'] = 1;
-
-					header('Location: home');
-					exit();
-
-				} catch (Exception $e) {
-					//ERROR SAVING CONFIG
-					print_r($e);
 				}
+
+				$_SESSION['user_id'] = 1;
 
 			} catch (Exception $e) {
 				//ERROR CONNECTING
@@ -87,6 +75,11 @@
 	<body>
 		<h1>Shortener</h1>
 		<hr />
+		<?php if (isset($config)) { ?>
+		<p>Please copy the text below and save as 'config.json' inside of the 'config' directory.</p>
+		<code><?=$config?></code>
+		<button onclick="location.href='home';">Done</button>
+		<?php } ?>
 		<h2>Installer</h2>
 
 		<form action="install.php" method="POST">
