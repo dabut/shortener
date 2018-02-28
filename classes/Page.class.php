@@ -29,7 +29,6 @@
 
 			if (file_exists($filename)) {
 				return '<style>' . file_get_contents($filename) . '</style>';
-				print_r('yeah');
 			}
 		}
 

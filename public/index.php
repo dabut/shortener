@@ -2,11 +2,7 @@
 
 	include '../global.php';
 
-	$page = new Page('blank');
-
-	$router = new Router();
-
-	$route = $router->parseGet($_GET);
+	$route = Router::parseGet($_GET);
 
 	if ($route['type'] == 'redirect') {
 		header('Location: ' . $route['route']);
@@ -15,7 +11,10 @@
 		$page = new Page($route['route']);
 	}
 
-	echo '<!--';
+?>
+
+<?php
+	/*
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +31,5 @@
 </html>
 
 <?php
-
-	echo '-->';
+	*/
 ?>

@@ -1,10 +1,14 @@
+<!DOCTYPE html>
 <html>
-<head>
-<title>Home</title>
-<?=$page->loadCSS('style.css')?>
-</head>
-<body>
-<a href="add_route">Add route</a>
-<a href="logout">Logout</a>
-</body>
+	<head>
+		<title>Home</title>
+		<?=$page->loadCSS('style.css')?>
+	</head>
+	<body>
+		<?=$page->loadElement('header.html')?>
+		<section>
+			<h2>Home</h2>
+		</section>
+		<?=$page->loadElement('footer.html')?>
+	</body>
 </html>

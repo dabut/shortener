@@ -23,14 +23,7 @@
 	if (isset($_SESSION['user_id'])) {
 		$user = new User($_SESSION['user_id']);
 	} else {
-		if (!isset($_GET['request']) || ($_GET['request'] != 'login' && $_GET['request'] != 'register')) {
-			header('Location: login');
-			exit();
-		}
-	}
-
-	if (file_exists(ROOT_DIR . '/actions.php')) {
-		include ROOT_DIR . '/actions.php';
+		$user = new User(0);
 	}
 
 ?>

@@ -5,7 +5,7 @@
 		private $id;
 		private $username;
 
-		public function __construct($user_id) {
+		public function __construct($user_id = '0') {
 
 			global $pdo;
 
@@ -20,7 +20,8 @@
 				$this->id = $user_id;
 				$this->username = $result['username'];
 			} else {
-				throw new Exception("User not found");
+				$this->id = '0';
+				$this->username = 'guest';
 			}
 		}
 
@@ -30,6 +31,12 @@
 
 		public function getUsername() {
 			return $this->username;
+		}
+
+		public function requireLogin() {
+			if ($this->id == 0) {
+				header('Location: login?redirect=' . basename($_SERVER['REQUEST_URI']));
+			}
 		}
 	}
 

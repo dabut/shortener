@@ -1,5 +1,7 @@
 <?php
 
+	$user->requireLogin();
+
 	$required = Array('request', 'route');
 
 	if (count(array_intersect_key(array_flip($required), $_POST)) == count($required)) {
@@ -21,12 +23,19 @@
 <html>
 	<head>
 		<title>Add Route</title>
+		<?=$page->loadCSS('style.css')?>
 	</head>
 	<body>
-		<form action="add_route" method="POST">
-			<input type="text" name="request" placeholder="Request" />
-			<input type="text" name="route" placeholder="Route" />
-			<input type="submit" value="Add" />
-		</form>
+		<?=$page->loadElement('header.html')?>
+		<section>
+			<h2>Add Route</h2>
+
+			<form action="add_route" method="POST">
+				<input type="text" name="request" placeholder="Request" />
+				<input type="text" name="route" placeholder="Route" />
+				<input type="submit" value="Add" />
+			</form>
+		</section>
+		<?=$page->loadElement('footer.html')?>
 	</body>
 </html>

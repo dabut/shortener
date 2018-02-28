@@ -1,6 +1,6 @@
 <?php
 
-	if (isset($user)) {
+	if ($user->getId() != 0) {
 		header('Location: home');
 		exit();
 	}
@@ -34,8 +34,13 @@
 
 			$_SESSION['user_id'] = $result['id'];
 
-			header('Location: home');
-			exit();
+			if (isset($_GET['redirect']) && $_GET['redirect'] != '') {
+				header('Location: ' . $_GET['redirect']);
+				exit();
+			} else {
+				header('Location: home');
+				exit();
+			}
 
 		} else {
 			//LOGIN FAILED
@@ -55,7 +60,7 @@
 		<section>
 			<h2>Login</h2>
 
-			<form action="login" method="POST">
+			<form action="login<?=isset($_GET['redirect'])?'?redirect='.$_GET['redirect']:''?>" method="POST">
 				<input type="text" name="username" placeholder="Username" />
 				<input type="password" name="password" placeholder="Password" />
 				<input type="submit" name="action" value="Login" />

@@ -2,21 +2,15 @@
 
 	class Router {
 
-		private $request = 'home';
-
-		public function getRequest() {
-			return $this->request;
-		}
-
 		public function parseGet($get) {
 
 			if (isset($get['request'])) {
 
-				return $this->parseRequest($get['request']);
+				return self::parseRequest($get['request']);
 
 			} else {
 
-				return $this->parseRequest('home');
+				return self::parseRequest('home');
 			}
 		}
 
@@ -42,13 +36,11 @@
 
 				$request = implode('/', $request_parts);
 
-				$this->request = $request;
-
-				return $this->getRoute();
+				return self::getRoute($request);
 
 			} else {
 
-				return $this->parseRequest('home');
+				return self::parseRequest('home');
 			}
 		}
 
@@ -70,7 +62,7 @@
 			}
 		}
 
-		private function getRoute() {
+		private function getRoute($request) {
 
 			global $pdo;
 
@@ -78,7 +70,7 @@
 
 				$query = $pdo->prepare("SELECT id, route FROM routes WHERE request = :request");
 
-				$query->bindParam(':request', $this->request);
+				$query->bindParam(':request', $request);
 				$query->execute();
 
 				$result = $query->fetch();
@@ -88,7 +80,7 @@
 					$type = 'redirect';
 					$route = $result['route'];
 
-					$this->click($result['id']);
+					self::click($result['id']);
 
 					return Array('type' => $type, 'route' => $route);
 
@@ -96,8 +88,8 @@
 
 					$type = 'page';
 
-					if (file_exists(ROOT_DIR . '/pages/' . $this->getRequest() . '.page.php')) {
-						$route = $this->getRequest();
+					if (file_exists(ROOT_DIR . '/pages/' . $request . '.page.php')) {
+						$route = $request;
 					} else {
 						$route = '404';
 					}
