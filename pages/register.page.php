@@ -1,6 +1,6 @@
 <?php
 
-	if (isset($user)) {
+	if ($user->getId() != 0) {
 		header('Location: home');
 		exit();
 	}
@@ -64,9 +64,13 @@
 
 			<form action="register" method="POST">
 				<input type="text" name="username" placeholder="Username" value="<?=$defaults['username']?>" />
+				<br />
 				<input type="email" name="email" placeholder="Email" />
+				<br />
 				<input type="password" name="password" placeholder="Password" />
+				<br />
 				<input type="password" name="password_check" placeholder="Password Again" />
+				<br />
 				<input type="submit" value="Register" />
 			</form>
 		</section>

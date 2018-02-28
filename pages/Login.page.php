@@ -62,8 +62,11 @@
 
 			<form action="login<?=isset($_GET['redirect'])?'?redirect='.$_GET['redirect']:''?>" method="POST">
 				<input type="text" name="username" placeholder="Username" />
+				<br />
 				<input type="password" name="password" placeholder="Password" />
+				<br />
 				<input type="submit" name="action" value="Login" />
+				<br />
 				<input type="submit" name="action" value="Register" />
 			</form>
 		</section>

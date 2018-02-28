@@ -16,14 +16,15 @@
 		}
 	});
 
-	$conn = new Connection();
+	if (!isset($install) || !$install) {
+		$conn = new Connection();
+		$pdo = $conn->PDO();
 
-	$pdo = $conn->PDO();
-
-	if (isset($_SESSION['user_id'])) {
-		$user = new User($_SESSION['user_id']);
-	} else {
-		$user = new User(0);
+		if (isset($_SESSION['user_id'])) {
+			$user = new User($_SESSION['user_id']);
+		} else {
+			$user = new User(0);
+		}
 	}
 
 ?>

@@ -32,7 +32,9 @@
 
 			<form action="add_route" method="POST">
 				<input type="text" name="request" placeholder="Request" />
+				<br />
 				<input type="text" name="route" placeholder="Route" />
+				<br />
 				<input type="submit" value="Add" />
 			</form>
 		</section>

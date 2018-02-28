@@ -6,8 +6,9 @@
 		private $dbname;
 		private $user;
 		private $pass;
+		private $options;
 
-		public function __construct($param = false) {
+		public function __construct($param = false, $options = Array()) {
 
 			if (!$param) {
 
@@ -22,13 +23,27 @@
 
 				$this->loadConfigFile($param);
 			}
+
+			$this->options = $options;
 		}
 
 		public function PDO() {
 			
-			$pdo = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbname . ';', $this->user, $this->pass);
+			$pdo = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbname . ';', $this->user, $this->pass, $this->options);
 
 			return $pdo;
+		}
+
+		public function getConfig() {
+
+			$config = Array();
+
+			$config['host'] = $this->host;
+			$config['dbname'] = $this->dbname;
+			$config['user'] = $this->user;
+			$config['pass'] = $this->pass;
+
+			return $config;
 		}
 
 		private function loadConfigArray($config_array) {
