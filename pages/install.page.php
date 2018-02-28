@@ -31,7 +31,7 @@
 
 					$query->execute();
 
-					if ($query->rowCount()) {
+					if ($query->rowCount() == 0) {
 
 						$password = md5($_POST['password']);
 
@@ -50,7 +50,7 @@
 
 						$query->bindParam(':username', $_POST['username']);
 						$query->bindParam(':password', $password);
-						$query->bindParma(':email', $_POST['email']);
+						$query->bindParam(':email', $_POST['email']);
 						$query->execute();
 
 					}

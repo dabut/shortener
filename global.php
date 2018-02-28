@@ -17,6 +17,12 @@
 	});
 
 	if (!isset($install) || !$install) {
+
+		if (!file_exists(ROOT_DIR . '/config/config.json')) {
+			header('Location: install.php');
+			exit();
+		}
+
 		$conn = new Connection();
 		$pdo = $conn->PDO();
 
